@@ -1,9 +1,10 @@
 import express from 'express';
 import http from 'http';
 import('./database/index.js');
-
+import { initSocket } from './socket/index.js';
 const app = express();
 const server = http.createServer(app);
+initSocket(server);
 const port = 3000;
 
 server.listen(port, () => {
