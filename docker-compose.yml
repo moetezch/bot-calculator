@@ -4,8 +4,8 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-    image: calculator-bot
-    container_name: calculator_bot
+    image: calculator-bot_server
+    container_name: calculator_bot_server
     restart: always
     ports:
       - "3001:3000"        
@@ -15,7 +15,19 @@ services:
       - ./server:/usr/src/app/server    
     networks:
       - app_network
-
+  react_app:
+    build:
+      context: ./client 
+      dockerfile: Dockerfile
+    image: calculator-bot_client
+    container_name: calculator-bot_client
+    restart: always
+    ports:
+      - "3002:3000" 
+    volumes:
+      - ./client:/usr/src/app/client    
+    networks:
+      - app_network
   mongo_db:
     image: mongo
     container_name: mongodb
