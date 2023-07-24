@@ -8,7 +8,7 @@ services:
     container_name: calculator_bot_server
     restart: always
     ports:
-      - "3001:3000"        
+      - "4777:4777"        
     depends_on:
       - mongo_db
     volumes:
@@ -23,7 +23,7 @@ services:
     container_name: calculator-bot_client
     restart: always
     ports:
-      - "3002:3000" 
+      - "3000:3000" 
     volumes:
       - ./client:/usr/src/app/client    
     networks:

@@ -5,7 +5,7 @@ import { initSocket } from './socket/index.js';
 const app = express();
 const server = http.createServer(app);
 initSocket(server);
-const port = 3000;
+const port = 4777;
 
 server.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
