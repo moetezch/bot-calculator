@@ -2,7 +2,11 @@ import { assert } from 'chai';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 
-import { getHistory, calculate, invalidCommand } from '../services/index.js';
+import {
+    getHistory,
+    calculate,
+    invalidCommand,
+} from '../src/services/index.js';
 
 describe('bot calculator', () => {
     let mongoServer;

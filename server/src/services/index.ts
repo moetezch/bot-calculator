@@ -1,5 +1,5 @@
 import { evaluate } from 'mathjs';
-import { History } from '../database/schemas/History.js';
+import { History } from '../database/schemas/History';
 
 export const invalidCommand = 'Invalid command';
 
@@ -8,7 +8,7 @@ export const getHistory = async () => {
     return history;
 };
 
-export const setHistory = async ({ command, result }) => {
+export const setHistory = async ({ command, result } : { command:string , result: string}) => {
     const newHistory = new History({
         command,
         result,
@@ -16,15 +16,16 @@ export const setHistory = async ({ command, result }) => {
     await newHistory.save();
 };
 
-export const calculate = async (command) => {
+export const calculate = async (command:string) => {
     const entry = {
         command,
+        result:invalidCommand
     };
     try {
         const result = evaluate(command);
         entry.result = result;
     } catch (error) {
-        entry.result = invalidCommand;
+        console.log("invalid command")
     }
 
     await setHistory(entry);
