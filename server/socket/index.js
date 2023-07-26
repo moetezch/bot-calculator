@@ -1,7 +1,8 @@
 import { Server } from 'socket.io';
 import { evaluate } from 'mathjs';
-
+import { getHistory, setHistory } from '../services/index.js';
 const invalidCommand = 'Invalid command';
+
 export const initSocket = (server) => {
     const io = new Server(server, {
         cors: {
@@ -9,15 +10,17 @@ export const initSocket = (server) => {
         },
     });
     io.on('connection', (socket) => {
-        const history = [];
         console.log('a user connected');
         socket.on('disconnect', () => {
             console.log('user disconnected');
         });
-        socket.on('history', () => {
+
+        socket.on('history', async () => {
+            const history = await getHistory();
             socket.emit('history', history);
         });
-        socket.on('calculate', (command) => {
+
+        socket.on('calculate', async (command) => {
             const entry = {
                 command,
             };
@@ -29,7 +32,7 @@ export const initSocket = (server) => {
                 entry.result = invalidCommand;
                 socket.emit('result', invalidCommand);
             }
-            history.push(entry);
+            await setHistory(entry);
         });
     });
 };
