@@ -16,3 +16,9 @@ Before running the application, ensure you have the following installed on your 
 docker-compose build
 docker-compose up
 ```
+
+## Test
+
+```bash
+yarn test
+```
